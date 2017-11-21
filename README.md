@@ -1,18 +1,10 @@
-== Money
+## This fork is gonna to fix some issues connected to new ruby and rails versions 
+
+### Money
 
 This library makes it easier to deal with Money values, storing them as integers to avoid floating-point math errors.
 
-== Download
-
-Preferred method of installation is gem: 
-
-  gem install --source http://gems.github.com collectiveidea-money 
-
-You can find the source at:
-  
-  http://github.com/collectiveidea/money
-
-== Rails
+### Rails
 
 There is a rails extension that makes it easier to store money values in the database.
 
@@ -50,35 +42,30 @@ By default, money values will be stored with a precision of 2 (cents). If you ne
 To use the Rails functionality, install money as a plugin, or require 'money/rails'.
 This version is compatible with Rails 2.2.  For compatibility with previous versions of
 Rails, check out the rails-2.1 branch.
-  
-== Class configuration
 
-Two const class variables are available to tailor Money to your needs. 
+### Class configuration
+
+Two const class variables are available to tailor Money to your needs.
 If you don't need currency exchange at all, just ignore those.
 
-=== Default Currency
+### Default Currency
 
 By default Money defaults to USD as its currency. This can be overwritten using
 
   Money.default_currency = "CAD"
-  
-If you use rails, the environment.rb is a very good place to put this. 
 
-=== Currency Exchange
+If you use rails, the environment.rb is a very good place to put this.
 
-The second parameter is a bit more complex. It lets you provide your own implementation of the 
-currency exchange service. By default Money throws an exception when trying to call .exchange_to. 
+### Currency Exchange
+
+The second parameter is a bit more complex. It lets you provide your own implementation of the
+currency exchange service. By default Money throws an exception when trying to call .exchange_to.
 
 A second minimalist implementation is provided which lets you supply custom exchange rates:
 
-  Money.bank = VariableExchangeBank.new 
+  Money.bank = VariableExchangeBank.new
   Money.bank.add_rate("USD", "CAD", 1.24515)
   Money.bank.add_rate("CAD", "USD", 0.803115)
   Money.us_dollar(100).exchange_to("CAD") => Money.ca_dollar(124)
   Money.ca_dollar(100).exchange_to("USD") => Money.us_dollar(80)
 
-There is nothing stopping you from creating bank objects which scrape www.xe.com for the current rates or just return rand(2)
-  
-== Code
-
-If you have any improvements please email them to tobi [at] leetsoft.com 
