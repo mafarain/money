@@ -45,6 +45,7 @@ class Money
   end
 
   def <=>(other_money)
+    return nil unless other_money.is_a?(Money)
     if currency == other_money.currency
       cents <=> other_money.cents
     else
